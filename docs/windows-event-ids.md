@@ -36,23 +36,46 @@ The fields listed above are expected event attributes. Actual availability depen
 
 ### Event ID 4624 — Successful Logon
 
-**Purpose:** Records a successful authentication session.
+#### Event Purpose
 
-**Fields to inspect:**
-- TargetUserName
-- TargetDomainName
-- LogonType
-- IpAddress
-- WorkstationName
-- TargetLogonId
+Records a successful Windows authentication session.
 
-**Detection idea:** Identify a successful logon occurring after multiple failed authentication attempts against the same account.
+#### Observed Fields
 
-**MITRE ATT&CK:** T1078 — Valid Accounts, when malicious account use is established.
+| Field | Observed Value |
+|---|---|
+| Event ID | 4624 |
+| Log source | Windows Security |
+| Account | REDACTED |
+| Domain | REDACTED |
+| Logon type | 5 |
+| Source IP | [REDACTED or not populated] |
+| Computer | REDACTED |
+| Timestamp | UTC |
 
-**Potential false positives:** Normal employee authentication, administrator activity and service account logons.
+#### Detection Idea
 
-**Observed fields:** Pending lab validation.
+Identify unexpected successful remote interactive
+logons, particularly those occurring after multiple
+failed authentication attempts.
+
+#### Potential False Positives
+
+- Authorized administrator access
+- Legitimate remote desktop sessions
+- Approved remote maintenance
+
+#### MITRE ATT&CK Mapping
+
+T1078 — Valid Accounts (when malicious use is established).
+
+#### Screenshot Evidence
+
+![Event 4624 Successful Logon](../screenshots/windows-events/event-4624-successful-logon.png)
+
+#### Validation Status
+
+Pending — update after reviewing actual evidence.
 
 ### Event ID 4625 — Failed Logon
 
